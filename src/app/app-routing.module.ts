@@ -9,11 +9,6 @@ import { RegisterComponent } from './pages/register/register.component'
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
-        pathMatch: 'full',
-    },
-    {
-        path: '',
         component: MainLayoutComponent,
         children: [{ path: 'home', component: HomeComponent }],
     },
@@ -45,6 +40,16 @@ const routes: Routes = [
             import('./pages/register/register.component').then(
                 (mod) => mod.RegisterComponent
             ),
+    },
+    {
+        path: 'post',
+        loadChildren: () =>
+            import('./pages/index/index.module').then((m) => m.IndexModule),
+    },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
     },
 ]
 
