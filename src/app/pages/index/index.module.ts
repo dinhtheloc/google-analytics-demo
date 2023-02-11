@@ -5,9 +5,15 @@ import { ViewComponent } from './components/view/view.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { PostRoutingModule } from './post-routing.module'
 import { CreateComponent } from './components/create/create.component'
+import { IndexComponent } from './index.component'
 
 @NgModule({
-    declarations: [EditComponent, ViewComponent, CreateComponent],
+    declarations: [
+        IndexComponent,
+        EditComponent,
+        ViewComponent,
+        CreateComponent,
+    ],
     imports: [
         CommonModule,
         FormsModule,

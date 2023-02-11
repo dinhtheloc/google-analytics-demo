@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
@@ -8,11 +8,13 @@ import { LayoutsModule } from './layouts/layouts/layouts.module'
 import { HomeComponent } from './pages/home/home.component'
 import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
-import { CrudService } from './services/crud.service';
+import { CrudService } from './services/crud.service'
 import { IndexComponent } from './pages/index/index.component'
+import { LoaderComponent } from './components/loader/loader.component'
+import { LoadingInterceptor } from './interceptors/loading.interceptor'
 
 @NgModule({
-    declarations: [AppComponent, IndexComponent],
+    declarations: [AppComponent, LoaderComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -23,11 +25,15 @@ import { IndexComponent } from './pages/index/index.component'
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-
-
-        
     ],
-    providers: [CrudService],
+    providers: [
+        CrudService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoadingInterceptor,
+            multi: true,
+        },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
