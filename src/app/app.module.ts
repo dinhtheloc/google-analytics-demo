@@ -12,6 +12,7 @@ import { CrudService } from './services/crud.service'
 import { IndexComponent } from './pages/index/index.component'
 import { LoaderComponent } from './components/loader/loader.component'
 import { LoadingInterceptor } from './interceptors/loading.interceptor'
+import { AuthInterceptor } from './interceptors/auth.interceptor'
 
 @NgModule({
     declarations: [AppComponent, LoaderComponent],
@@ -31,6 +32,11 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor'
         {
             provide: HTTP_INTERCEPTORS,
             useClass: LoadingInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
             multi: true,
         },
     ],
