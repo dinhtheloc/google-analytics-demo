@@ -26,7 +26,6 @@ import { CrudService } from './services/crud.service'
     ],
     providers: [
         CrudService,
-        // TestService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: LoadingInterceptor,
