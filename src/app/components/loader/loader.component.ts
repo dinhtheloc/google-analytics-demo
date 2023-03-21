@@ -8,5 +8,9 @@ import { ShareDataService } from 'src/app/services/share-data.service'
 })
 export class LoaderComponent {
     isLoading$ = this.shareDataService.isLoading$
-    constructor(private shareDataService: ShareDataService) {}
+    constructor(
+        private shareDataService: ShareDataService
+    ) {
+
+    }
 }
