@@ -1,7 +1,13 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser'
+import { provideRouter, withPreloading } from '@angular/router'
+import { quicklinkProviders, QuicklinkStrategy } from 'ngx-quicklink'
+import { AppComponent } from './app/app.component'
+import { routes } from './app/routes'
 
-import { AppModule } from './app/app.module';
-
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+    providers: [
+        quicklinkProviders,
+        provideRouter(routes, withPreloading(QuicklinkStrategy)),
+        // importProvidersFrom(RouterModule.forRoot(routes))
+    ],
+}).catch((err) => console.error(err))

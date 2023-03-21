@@ -2,7 +2,6 @@ import { Routes } from '@angular/router'
 import { CenteredContentLayoutComponent } from './layouts/centered-content-layout/centered-content-layout.component'
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'
 
-
 export const routes: Routes = [
     {
         path: 'home',
@@ -28,11 +27,11 @@ export const routes: Routes = [
                 (routes) => routes.registerRoutes
             ),
     },
-    {
-        path: 'post',
-        loadChildren: () =>
-            import('./pages/index/index.module').then((m) => m.IndexModule),
-    },
+    // {
+    //     path: 'post',
+    //     loadChildren: () =>
+    //         import('./pages/index/index.module').then((m) => m.IndexModule),
+    // },
     {
         path: '',
         redirectTo: 'home',

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core'
-import { RouterModule } from '@angular/router'
+import { RouterLink } from '@angular/router'
+import { QuicklinkDirective } from 'ngx-quicklink'
 
 @Component({
     standalone: true,
-    imports: [RouterModule],
+    imports: [RouterLink, QuicklinkDirective],
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
