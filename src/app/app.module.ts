@@ -1,6 +1,8 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { RouterModule } from '@angular/router'
+import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -12,6 +14,7 @@ import { HomeComponent } from './pages/home/home.component'
 import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
 import { CrudService } from './services/crud.service'
+import { routes } from './routes';
 
 @NgModule({
     declarations: [AppComponent, LoaderComponent],
@@ -23,6 +26,12 @@ import { CrudService } from './services/crud.service'
         HomeComponent,
         LoginComponent,
         RegisterComponent,
+        QuicklinkModule, 
+        RouterModule.forRoot(
+            routes, {
+                preloadingStrategy: QuicklinkStrategy
+            }
+        )
     ],
     providers: [
         CrudService,
