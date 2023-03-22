@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import {
     HttpRequest,
     HttpHandler,
@@ -10,7 +10,7 @@ import { ShareDataService } from '../services/share-data.service'
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
-    constructor(private shareDataService: ShareDataService) {}
+    private shareDataService = inject(ShareDataService)
     private _totalRequests: number = 0
     intercept(
         request: HttpRequest<unknown>,

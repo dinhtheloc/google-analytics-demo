@@ -20,18 +20,12 @@ export class IndexComponent {
 
     exampleForm!: FormGroup
 
-    constructor(
-        public postService: PostService,
-        private fb: FormBuilder,
-        private shareDataService: ShareDataService
-    ) {}
+    constructor(public postService: PostService, private fb: FormBuilder) {}
 
     ngOnInit(): void {
-        // this.shareDataService.setLoading(true)
         this.postService.getAll().subscribe((data: Post[]) => {
             this.posts = data
             console.log(this.posts)
-            // this.shareDataService.setLoading(false)
         })
 
         this.exampleForm = this.fb.group({

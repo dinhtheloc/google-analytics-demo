@@ -1,5 +1,5 @@
 import { AsyncPipe, NgIf } from '@angular/common'
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { ShareDataService } from 'src/app/services/share-data.service'
 
 @Component({
@@ -10,6 +10,6 @@ import { ShareDataService } from 'src/app/services/share-data.service'
     styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent {
+    private shareDataService = inject(ShareDataService)
     isLoading$ = this.shareDataService.isLoading$
-    constructor(private shareDataService: ShareDataService) {}
 }

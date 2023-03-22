@@ -1,6 +1,14 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
-import { Component } from '@angular/core'
-import { RouterModule, RouterOutlet } from '@angular/router'
+import { Component, inject } from '@angular/core'
+import {
+    RouteConfigLoadEnd,
+    RouteConfigLoadStart,
+    Router,
+    RouterEvent,
+    RouterOutlet,
+    Event,
+} from '@angular/router'
+import { filter } from 'rxjs'
 import { LoaderComponent } from './components/loader/loader.component'
 import { AuthInterceptor } from './interceptors/auth.interceptor'
 import { LoadingInterceptor } from './interceptors/loading.interceptor'
@@ -9,6 +17,7 @@ import { HomeComponent } from './pages/home/home.component'
 import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
 import { CrudService } from './services/crud.service'
+import { ShareDataService } from './services/share-data.service'
 
 @Component({
     selector: 'app-root',
@@ -39,4 +48,16 @@ import { CrudService } from './services/crud.service'
 })
 export class AppComponent {
     title = 'angular-best-practice'
+    private shareDataService = inject(ShareDataService)
+    constructor(router: Router) {
+        this.shareDataService.setLoading(false)
+        router.events.subscribe((e: Event) => {
+            // Do something
+            if (e instanceof RouteConfigLoadStart) {
+                this.shareDataService.setLoading(true)
+            } else if (e instanceof RouteConfigLoadEnd) {
+                this.shareDataService.setLoading(false)
+            }
+        })
+    }
 }
