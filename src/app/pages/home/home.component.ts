@@ -12,6 +12,13 @@ import { RouterLink } from '@angular/router'
 import { RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha'
 import { QuicklinkDirective } from 'ngx-quicklink'
 import { GoogleAnalyticsService } from 'src/app/services/google-analytics.service'
+declare const gtag: Function; 
+interface GTAEvent {
+    category?: string;
+    action?: string;
+    label?: string;
+    value?: string;
+  }
 
 export function PhoneNumberValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
@@ -59,9 +66,28 @@ export class HomeComponent {
     }
 
     submit() {
-        this.googleAnalyticsService.eventEmitter('intro.register', {
-            value: 'click',
-            phoneNumber: this.form.value.phoneNumber,
-        })
+
+        
+          const gta = {
+            event: ({ category = '', action = '', label = '', value = '' }: GTAEvent) => {
+                gtag('event', action, {
+                event_category: category,
+                event_label: label,
+                value: value
+              });
+            }
+          };
+
+          gta.event({
+            category: 'sign_up',
+            action: 'click',
+            label: 'SIGN UP',
+            value: ''
+          })
+          
+        // this.googleAnalyticsService.eventEmitter('intro.register', {
+        //     value: 'click',
+        //     phoneNumber: this.form.value.phoneNumber,
+        // })
     }
 }
