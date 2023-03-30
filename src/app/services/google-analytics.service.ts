@@ -5,7 +5,7 @@ declare let gtag: Function;
 })
 export class GoogleAnalyticsService {
     public eventEmitter(
-        action: Gtag.EventNames | string,
+        action: string,
         eventParams: any
     ) {
         gtag('event', action, eventParams)
