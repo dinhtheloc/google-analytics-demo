@@ -21,20 +21,13 @@ export class HomeComponent {
     private googleAnalyticsService = inject(GoogleAnalyticsService)
     public executeImportantAction(): void {
         // test trigger event
-        const action = 'click'
-        const event_category = 'Register home page'
-        const event_label = 'Button submit'
-        const value = 1234
-
         this.googleAnalyticsService.eventEmitter(
-            action,
-            event_category,
-            event_label,
-            value
+            "intro.register",
+            {"value":"click","tags":{"phoneNumber":"0937100576"}}
         )
 
-        this.recaptchaV3Service
-            .execute('importantAction')
-            .subscribe(console.log)
+        // this.recaptchaV3Service
+        //     .execute('importantAction')
+        //     .subscribe(console.log)
     }
 }
