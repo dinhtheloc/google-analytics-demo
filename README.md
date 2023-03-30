@@ -1,3 +1,3 @@
-# AngularBestPractice
+# Google Analytics and reCAPTCHA v3
 
-As a seasoned front-end developer, I have amassed extensive experience in Angular and have developed a best practice structure that I believe would be useful for someone looking to learn the framework. I invite you to use my example as a guide to elevate your own Angular development skills.
+This demo showcases the integration of Google Analytics with the latest version of reCAPTCHA, v3, in a simple and user-friendly way
