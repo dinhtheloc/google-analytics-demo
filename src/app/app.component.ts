@@ -7,6 +7,7 @@ import {
     RouterEvent,
     RouterOutlet,
     Event,
+    NavigationEnd,
 } from '@angular/router'
 import { filter } from 'rxjs'
 import { LoaderComponent } from './components/loader/loader.component'
@@ -18,7 +19,7 @@ import { LoginComponent } from './pages/login/login.component'
 import { RegisterComponent } from './pages/register/register.component'
 import { CrudService } from './services/crud.service'
 import { ShareDataService } from './services/share-data.service'
-
+declare const gtag: Function; 
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -57,6 +58,10 @@ export class AppComponent {
                 this.shareDataService.setLoading(true)
             } else if (e instanceof RouteConfigLoadEnd) {
                 this.shareDataService.setLoading(false)
+            } else if (e instanceof NavigationEnd) {
+                gtag('event', 'page_view', {
+                    page_path: e.urlAfterRedirects,
+                })
             }
         })
     }
