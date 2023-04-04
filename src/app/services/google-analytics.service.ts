@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core'
-declare let gtag: Function;
+declare let gtag: Gtag.Gtag;
+interface CustomParams {
+    [key: string]: any;
+  }
 @Injectable({
     providedIn: 'root',
 })
 export class GoogleAnalyticsService {
     public eventEmitter(
-        action: string,
-        eventParams: any
+        eventName: string,
+        eventParams: CustomParams
     ) {
-        gtag('event', action, eventParams)
+        gtag('event', eventName, eventParams)
     }
 }

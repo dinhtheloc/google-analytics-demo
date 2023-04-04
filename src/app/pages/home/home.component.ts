@@ -11,16 +11,9 @@ import {
 import { RouterLink } from '@angular/router'
 import { RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha'
 import { QuicklinkDirective } from 'ngx-quicklink'
-import { mergeMap } from 'rxjs'
+import { mergeMap, tap } from 'rxjs'
 import { FakeService } from 'src/app/services/fake.service'
 import { GoogleAnalyticsService } from 'src/app/services/google-analytics.service'
-declare const gtag: Function
-interface GTAEvent {
-    category?: string
-    action?: string
-    label?: string
-    value?: string
-}
 
 export function PhoneNumberValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
@@ -66,37 +59,25 @@ export class HomeComponent {
     public executeImportantAction(): void {
         this.recaptchaV3Service
             .execute('importantAction')
-            .pipe(mergeMap((token) => this.fakeService.checkRecaptcha(token)))
+            .pipe(
+                mergeMap((token) => this.fakeService.checkRecaptcha(token)),
+                tap(() =>
+                    this.googleAnalyticsService.eventEmitter('intro_register', {
+                        action: 'click',
+                        label: 'Submit',
+                        phone_number: this.form.value.phoneNumber,
+                        dinh_the_loc: 'test',
+                        gender: 'male',
+                        intro_register: 'test 1'
+                    })
+                )
+            )
             .subscribe((resp) => {
-                console.log({resp})
-                const gta = {
-                    event: ({
-                        category = '',
-                        action = '',
-                        label = '',
-                        value = '',
-                    }: GTAEvent) => {
-                        gtag('event', action, {
-                            event_category: category,
-                            event_label: label,
-                            value: value,
-                        })
-                    },
-                }
-                gta.event({
-                    category: 'sign_up',
-                    action: 'click',
-                    label: 'SIGN UP',
-                    value: this.form.value.phoneNumber,
-                })
+                console.log({ resp })
             })
     }
 
     submit() {
         this.executeImportantAction()
-        // this.googleAnalyticsService.eventEmitter('intro.register', {
-        //     value: 'click',
-        //     phoneNumber: this.form.value.phoneNumber,
-        // })
     }
 }
