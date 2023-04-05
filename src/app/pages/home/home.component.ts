@@ -67,7 +67,7 @@ export class HomeComponent {
                         label: 'Submit',
                         phone_number: this.form.value.phoneNumber,
                         dinh_the_loc: 'test',
-                        gender: 'male',
+                        gender: 'female',
                         intro_register: 'test 1'
                     })
                 )
