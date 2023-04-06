@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router'
 import { HomeComponent } from './home.component'
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'src/app/services/recaptcha-v3.service'
+import { environment } from 'src/environments/environment'
 
 export const homeRoutes: Routes = [
     {
@@ -11,7 +12,7 @@ export const homeRoutes: Routes = [
             ReCaptchaV3Service,
             {
                 provide: RECAPTCHA_V3_SITE_KEY,
-                useValue: '6Lc8IDUlAAAAANQ92hpn3mAhg9VGdcV9AdH-r0ON',
+                useValue: environment.RECAPTCHA_V3_SITE_KEY
             },
         ],
 
