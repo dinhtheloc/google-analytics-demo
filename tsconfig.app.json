@@ -3,7 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["@types/gtag.js"]
+    "types": ["@types/gtag.js", "@types/grecaptcha"]
   },
   "files": [
     "src/main.ts"

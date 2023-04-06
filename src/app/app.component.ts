@@ -42,7 +42,7 @@ declare const gtag: Function;
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true,
-        },
+        }
     ],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],

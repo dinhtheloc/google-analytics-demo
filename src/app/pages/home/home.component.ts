@@ -9,11 +9,11 @@ import {
     Validators,
 } from '@angular/forms'
 import { RouterLink } from '@angular/router'
-import { RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha'
 import { QuicklinkDirective } from 'ngx-quicklink'
 import { mergeMap, tap } from 'rxjs'
 import { FakeService } from 'src/app/services/fake.service'
 import { GoogleAnalyticsService } from 'src/app/services/google-analytics.service'
+import { ReCaptchaV3Service } from 'src/app/services/recaptcha-v3.service'
 
 export function PhoneNumberValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
@@ -32,8 +32,7 @@ export function PhoneNumberValidator(): ValidatorFn {
         NgClass,
         RouterLink,
         QuicklinkDirective,
-        RecaptchaV3Module,
-        ReactiveFormsModule,
+        ReactiveFormsModule 
     ],
     selector: 'app-home',
     templateUrl: './home.component.html',
